@@ -10,7 +10,10 @@
 ✅ Powered by Google Gemini API  
 
 ## 🔥 Live Demo  
-[🔗 Check it out on Streamlit]
+[🔗 Check it out on Streamlit]- https://ai-resumeanalyser-k94r5n2srbezalgzogczgi.streamlit.app/
+
+Upload your resume, enter a job description, and get AI-powered feedback on matching skills, skill gaps, and areas for improvement.
+
 
 ## 🛠 Tech Stack  
 - **Frontend**: Streamlit  
@@ -33,7 +36,6 @@
 4. Run locally
    ```bash
    streamlit run app.py
-
 
 
 
