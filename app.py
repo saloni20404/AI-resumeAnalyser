@@ -8,15 +8,25 @@ import re
 load_dotenv()
 
 # Fetch API Key
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+try:
+    GOOGLE_API_KEY = st.secrets.get("GOOGLE_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    PROMPT = st.secrets.get("PROMPT") or os.getenv("PROMPT")
+except Exception:
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+    PROMPT = os.getenv("PROMPT")
 
 if not GOOGLE_API_KEY:
-    raise ValueError("GOOGLE_API_KEY not found. Ensure it's set in .env file.")
+    st.error("Google Gemini API key missing. Please configure it in Streamlit Secrets.")
+    st.stop()
 
-# Configure Google Gemini API
+if not PROMPT:
+    PROMPT = (
+        "Analyze the resume against the job description. "
+        "Identify matching skills, missing skills, strengths, weaknesses, "
+        "and suggestions for improvement. Provide an estimated match percentage."
+    )
+
 genai.configure(api_key=GOOGLE_API_KEY)
-
-PROMPT = os.getenv("PROMPT")
 
 
 # Function to extract text from PDF
